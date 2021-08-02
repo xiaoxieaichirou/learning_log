@@ -1,0 +1,17 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+  <p>Topics</p>
+  <ul>
+    {% for topic in topics %}
+      <!--<li>{{ topic }}</li>  &lt;!&ndash; 模版中打印变量，需要将变量名用双花括号括起来&ndash;&gt;-->
+      <li>
+        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+      </li>
+    {% empty %}  <!-- 异常处理：topics为空时，这里打印一条消息-->
+      <li>No topics have been adder yet.</li>
+    {% endfor%}
+  </ul>
+
+  <a href="{% url 'learning_logs:new_topic' %}">Add a new topic:</a>
+{% endblock content %}

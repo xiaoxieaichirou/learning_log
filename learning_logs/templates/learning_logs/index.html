@@ -1,0 +1,7 @@
+<!-- 子模版第一行必须包含标签extends，使程序知道它继承哪个父模版-->
+{% extends "learning_logs/base.html" %}
+
+<!-- content的block定义不是从父模版继承的内容都包含在content中-->
+{% block content %}
+<p>Learning Log helps you keep track of your learning, for any topic you're learning about.</p>
+{% endblock content %}

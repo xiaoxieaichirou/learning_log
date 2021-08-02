@@ -1,0 +1,14 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+  <p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
+
+  <p>Add a new entry:</p>
+  <form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
+      {% csrf_token %}  <!-- 防止攻击者利用表单来获得对服务器未授权的访问-->
+      {{ form.as_p }}  <!-- 显示表单的全部字段 -->
+      <button name="submit">add entry</button>
+  </form>
+
+{% endblock content %}
