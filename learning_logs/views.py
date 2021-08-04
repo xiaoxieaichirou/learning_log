@@ -18,7 +18,7 @@ def index(request):
 @login_required
 def topics(request):
     """显示所有的主题"""
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    topics = Topic.objects.filter(owner=request.user).order_by('date_added')  # filter()获取合适的数据
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
@@ -60,7 +60,6 @@ def new_entry(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
 
     check_topic_owner(request, topic)
-
 
     if request.method != 'POST':
         form = EntryForm()
