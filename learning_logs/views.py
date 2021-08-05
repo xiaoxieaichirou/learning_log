@@ -5,7 +5,6 @@ from .models import Topic, Entry
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
 from .forms import TopicForm, EntryForm
 
 

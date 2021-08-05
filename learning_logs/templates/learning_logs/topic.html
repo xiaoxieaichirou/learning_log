@@ -14,7 +14,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>
-                    {{ topic.date_added|date:'Y M d, H:i' }}  <!--|表示模版过滤器，对模版变量的值进行修改 -->
+                    {{ entry.date_added|date:'Y M d, H:i' }}  <!--|表示模版过滤器，对模版变量的值进行修改 -->
                     <small>
                         <a href="{% url 'learning_logs:edit_entry' entry.id %}">edit entry</a>
                     </small>

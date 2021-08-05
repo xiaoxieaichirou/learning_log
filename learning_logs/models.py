@@ -16,8 +16,11 @@ class Topic(models.Model):
 class Entry(models.Model):
     """学到的有关某个主题的具体知识"""
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    """ForeignKey()实例,外键是一个数据库术语，它引用了数据库中的另一条记录；这些代码将每个条目关联
+        到特定的主题。每个主题创建时，都给它分配了一个键（或ID）。需要在两项数据之间建立联系时，
+        Django使用与每项信息相关联的键"""
     text = models.TextField()
-    date_added = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         """用于管理模型的额外信息"""
