@@ -1,6 +1,6 @@
 # Create your views here.
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Topic, Entry
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
@@ -25,7 +25,7 @@ def topics(request):
 @login_required
 def topic(request, topic_id):
     """显示单个主题及其所有的条目"""
-    topic = Topic.objects.get(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
 
     check_topic_owner(request, topic)
 
