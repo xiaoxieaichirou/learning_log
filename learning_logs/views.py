@@ -1,6 +1,6 @@
 # Create your views here.
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .models import Topic, Entry
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
@@ -25,7 +25,7 @@ def topics(request):
 @login_required
 def topic(request, topic_id):
     """显示单个主题及其所有的条目"""
-    topic = get_object_or_404(Topic, id=topic_id)
+    topic = Topic.objects.get(id=topic_id)
 
     check_topic_owner(request, topic)
 
@@ -44,7 +44,7 @@ def new_topic(request):
         # POST提交的数据，对数据进行处理
         form = TopicForm(request.POST)
         if form.is_valid():  # is_valid()核实用户填写了所有必不可少的字段
-            new_topic = form.save(commit=False)
+            new_topic = form.save(commit=False)  # 实参commit=False为创建一个新的条目对象，并将其存储到new_entry中，但不将它保存到数据库中
             new_topic.owner = request.user
             new_topic.save()
             return HttpResponseRedirect(
@@ -92,6 +92,12 @@ def edit_entry(request, entry_id):
             return HttpResponseRedirect(reverse('learning_logs:topic', args=[topic.id]))
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
+
+
+@login_required
+def delete_entry(id):
+    """删除既有条目"""
+    entry = Entry.objects.get(id=id)
 
 
 def check_topic_owner(request, topic):
